@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebdep01
+  labels:
+    app: mywebdep01
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      project: minsk
+  template:
+    metadata:
+      labels:
+        project: minsk        # Service will look for those PODS labels !!!
+    spec:
+      containers:
+        - name: minsk-web
+          image: faxri/myk8s:version2
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mywebdep01-pod-srv
+  labels:
+    env:   prod
+    owner: Fakhri_Huseynov
+spec:
+  selector:
+    project: minsk            # Selecting PODS with those Labels
+  ports:
+    - name:       app-listener
+      protocol:   TCP
+      port:       80          # Port on Load Balancer
+      targetPort: 80          # Port on POD
+  type: LoadBalancer

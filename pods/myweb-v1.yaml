@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: faxri-web
+spec:
+  containers:
+    - name: container-apache
+      image: faxri/myk8s:latest
+      ports:
+        - containerPort: 80
+  nodeSelector:
+    mylabel: fakhri

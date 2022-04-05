@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  my-web-app2
+  labels:
+    app:  my-app-dep2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      project: baku
+  template:
+    metadata:
+      labels:
+        project: baku # Service will look for POD labels !!
+    spec:
+      containers:
+        - name: baku-web
+          image: faxri/myk8s:version2
+          ports:
+            - containerPort: 80

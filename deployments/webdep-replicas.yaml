@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebapp-replicas
+  labels:
+    app: webk8s
+    env: prod
+    owner: Fakhri_Huseynov
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      project: minsk
+  template:
+    metadata:
+      labels:
+        project: minsk
+    spec:
+      containers:
+        - name: baku-web
+          image: faxri/myk8s:latest
+          ports:
+            - containerPort: 80

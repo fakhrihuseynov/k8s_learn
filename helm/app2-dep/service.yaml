@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mywebdep-pod2
+  labels:
+    env:   prod
+    owner: Fakhri_Huseynov
+spec:
+  selector:
+    project: baku            # Selecting PODS with those Labels
+  ports:
+    - name:       app-listener2
+      protocol:   TCP
+      port:       80          # Port on Load Balancer
+      targetPort: 80          # Port on POD
+  type: LoadBalancer

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebdep02
+  labels:
+    app: mywebdep02
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: kiev
+  template:
+    metadata:
+      labels:
+        project: kiev # Service will look for those PODS labels !!!
+    spec:
+      containers:
+        - name: kievweb-01
+          image: faxri/myk8s:latest
+          ports:
+            - containerPort: 80 # Port on POD
+
+        - name: kievweb-02
+          image: faxri/myk8s:version2
+          ports:
+            - containerPort: 8080 # Port on POD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: multipods
+  labels:
+    env: prod
+    owner: Fakhri_Huseynov
+spec:
+  type: LoadBalancer
+  selector:
+    project: kiev
+  ports:
+    - name        : kievweb-01-listener
+      protocol    : TCP
+      port        : 80
+      targetPort  : 80
+
+    - name        : kievweb-02-listener
+      protocol    : TCP
+      port        : 8888
+      targetPort  : 8080

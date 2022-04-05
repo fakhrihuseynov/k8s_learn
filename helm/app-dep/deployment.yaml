@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  my-web-app
+  labels:
+    app:  my-app-dep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      project: minsk
+  template:
+    metadata:
+      labels:
+        project: minsk # Service will look for POD labels !!
+    spec:
+      containers:
+        - name: minsk-web
+          image: faxri/myk8s:latest
+          ports:
+            - containerPort: 80

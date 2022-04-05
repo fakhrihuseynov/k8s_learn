@@ -1,0 +1,6 @@
+# Default vaules for my helm chart
+
+container:
+  image: faxri/myk8s:version2
+
+replicaCount: 4

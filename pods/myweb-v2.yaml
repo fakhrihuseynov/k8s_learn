@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: faxri-web
+  labels:
+    env : prod
+    app: main
+    tier: frontend
+    owner: Fakhri_Huseynov
+spec:
+  containers:
+    - name: container-apache
+      image: nginx:latest
+      ports:
+        - containerPort: 80

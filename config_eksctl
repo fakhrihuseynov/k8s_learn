@@ -1,0 +1,13 @@
+
+eksctl create cluster \
+    --name eks-from-eksctl \
+    --version 1.20 \
+    --region us-west-2 \
+    --nodegroup-name workers \
+    --node-type t3.medium \
+    --nodes 1 \
+    --nodes-min 1 \
+    --nodes-max 2 \
+    --ssh-access \
+    --ssh-public-key ~/.ssh/eks-demo.pem.pub \
+    --managed

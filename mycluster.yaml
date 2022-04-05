@@ -1,0 +1,21 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: fakhri-cluster
+  region: eu-central-1
+
+# vpc:
+#   subnets:
+#     private:
+#       eu-west-1     : {id: subnet-<your_id>}
+#       eu-west-2     : {id: subnet-<your_id>}
+#       eu-north-1    : {id: subnet-<your_id>}
+
+nodeGroups:
+  - name            : worker-nodes-group-1 
+    instanceType    : m5.large
+    desiredCapacity : 2
+  - name            : worker-nodes-group-2 
+    instanceType    : m5.large
+    desiredCapacity : 1
